@@ -40,6 +40,21 @@
       font-size: 1.2rem;
       margin-bottom: 2rem;
     }
+
+    /* Simple image gallery on the landing page */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery img {
+      max-width: 100%;
+      width: calc(33% - 1rem);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
     .button {
       background: #ff7043;
       color: #fff;
@@ -126,6 +141,22 @@
     <img src="images/PHOTO-2026-01-13-13-07-46.jpg" alt="Underwater scene">
     <p>Embark on a journey through time and markets to discover your inner fishy personality!</p>
     <button class="button" id="startBtn">Start Quiz</button>
+
+    <!-- Image gallery: displays all uploaded panels on the landing page -->
+    <div class="gallery">
+      <img src="images/PHOTO-2026-01-13-13-07-39.jpg" alt="Panel 1">
+      <img src="images/PHOTO-2026-01-13-13-07-40.jpg" alt="Panel 2">
+      <img src="images/PHOTO-2026-01-13-13-07-41.jpg" alt="Panel 3">
+      <img src="images/PHOTO-2026-01-13-13-07-41-2.jpg" alt="Panel 4">
+      <img src="images/PHOTO-2026-01-13-13-07-42.jpg" alt="Panel 5">
+      <img src="images/PHOTO-2026-01-13-13-07-42-2.jpg" alt="Panel 6">
+      <img src="images/PHOTO-2026-01-13-13-07-43.jpg" alt="Panel 7">
+      <img src="images/PHOTO-2026-01-13-13-07-44.jpg" alt="Panel 8">
+      <img src="images/PHOTO-2026-01-13-13-07-44-2.jpg" alt="Panel 9">
+      <img src="images/PHOTO-2026-01-13-13-07-45.jpg" alt="Panel 10">
+      <img src="images/PHOTO-2026-01-13-13-07-45-2.jpg" alt="Panel 11">
+      <img src="images/PHOTO-2026-01-13-13-07-46.jpg" alt="Panel 12">
+    </div>
   </section>
   <!-- Quiz Section -->
   <section id="quiz">
@@ -158,6 +189,8 @@
     const questions = [
       {
         narrative: "You find yourself in an old fishing village. Villagers invite you to join their fishing party.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-39.jpg",
         question: "Where should we go to catch the fish?",
         options: [
           { text: "Follow the group heading to the popular fishing spot in the deep, vast sea. More hands, more fun!", value: 'E' },
@@ -166,6 +199,8 @@
       },
       {
         narrative: "The boat rocks gently on open waters. It’s time to choose the fishing method.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-40.jpg",
         question: "Which fishing method will you use?",
         options: [
           { text: "The classic line fishing method. It’s simple and reliable.", value: 'S' },
@@ -174,6 +209,8 @@
       },
       {
         narrative: "Your baskets overflow with fish glistening under the setting sun. Dinner time!",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-41.jpg",
         question: "What will you do with your catch?",
         options: [
           { text: "Keep the best fish to sell tomorrow. Cook just enough for tonight.", value: 'T' },
@@ -182,6 +219,8 @@
       },
       {
         narrative: "A fish vendor worries about moving to the new wet market.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-41%202.jpg",
         question: "What advice will you give her?",
         options: [
           { text: "Move to the wet market while there are spots. Seize the chance now!", value: 'J' },
@@ -190,6 +229,8 @@
       },
       {
         narrative: "The wet market thrives! More customers visit daily. Stall vendors are overwhelmed.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-42.jpg",
         question: "How will you handle the rush?",
         options: [
           { text: "Hire more staff to help and create relationships with customers!", value: 'E' },
@@ -198,6 +239,8 @@
       },
       {
         narrative: "You are back in familiar surroundings. Fish can now reach you in countless ways.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-42%202.jpg",
         question: "Where will you buy your fish?",
         options: [
           { text: "The wet market. You need to touch and see before you buy it.", value: 'S' },
@@ -206,6 +249,8 @@
       },
       {
         narrative: "Your fish has finally arrived in your kitchen after a long journey.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-43.jpg",
         question: "Which recipe will you follow to prepare the fish?",
         options: [
           { text: "Super precise measurements. Being precise equals a perfect dish.", value: 'T' },
@@ -214,6 +259,8 @@
       },
       {
         narrative: "You're back at the market where it all began. A glowing door whispers of the future.",
+        // Image shown above this question
+        image: "images/PHOTO-2026-01-13-13-07-44.jpg",
         question: "What will you do?",
         options: [
           { text: "Step through the door. I want to see what’s coming to prepare myself.", value: 'J' },
@@ -339,6 +386,16 @@
       // Update progress bar: show completed questions proportion
       progressBar.style.width = (currentQuestion / questions.length) * 100 + '%';
       questionContainer.innerHTML = '';
+      // If an image is associated with the question, display it before the narrative
+      if (q.image) {
+        const imgEl = document.createElement('img');
+        imgEl.src = q.image;
+        imgEl.alt = 'Question illustration';
+        imgEl.style.maxWidth = '100%';
+        imgEl.style.borderRadius = '12px';
+        imgEl.style.marginBottom = '1rem';
+        questionContainer.appendChild(imgEl);
+      }
       // Narrative sets the scene
       const narrative = document.createElement('p');
       narrative.textContent = q.narrative;
